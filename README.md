@@ -1,37 +1,63 @@
 # Research Center Quality Classification
 
-## Overview
-Machine learning project to classify UK research centers into quality tiers (Premium, Standard, Basic) using K-Means clustering and FastAPI.
+A machine learning project that classifies UK research centers into quality tiers based on internal infrastructure and access to external healthcare services.
+
+## What This Project Does
+
+Given information about a research center such as how many internal facilities it has and how many hospitals or pharmacies are nearby, this system automatically classifies it into one of three quality tiers:
+
+**Premium** — Well-equipped centers with excellent healthcare access
+
+**Standard** — Moderately equipped centers with average healthcare access
+
+**Basic** — Limited facilities with minimal healthcare access
+
+This is useful for funding bodies, researchers, and healthcare organizations to quickly assess and compare research center quality across UK cities.
+
+## How It Works
+
+1. Exploratory Data Analysis to understand patterns in the data across UK cities
+2. Feature Selection to identify the most important indicators of quality
+3. K-Means Clustering to group centers into 3 tiers without labelled data
+4. FastAPI Deployment to serve the model as a REST API endpoint
+5. Docker to containerize the entire application for easy deployment
 
 ## Project Structure
 ```
-research-center-assignment/
-├── app.py
-├── cluster_model.pkl
-├── requirements.txt
-├── Dockerfile
-├── docker-compose.yaml
-├── .dockerignore
-├── EDA_and_Model.ipynb
-├── research_centers.csv
-└── research_centers_clustered.csv
+research-center/
+├── app.py                          # FastAPI application
+├── cluster_model.pkl               # Trained K-Means model
+├── requirements.txt                # Python dependencies
+├── Dockerfile                      # Docker build instructions
+├── docker-compose.yaml             # Docker Compose configuration
+├── .dockerignore                   # Files excluded from Docker image
+├── EDA_and_Model.ipynb             # Full analysis and model training
+├── research_centers.csv            # Original dataset
+└── research_centers_clustered.csv  # Dataset with predicted tiers
 ```
 
-## How to Run
+## Getting Started
 
-### Option 1 — With Docker (recommended)
+**Option 1: Run with Docker (Recommended)**
+
+Make sure Docker is installed, then run:
 ```bash
 docker compose up --build
 ```
 
-### Option 2 — Without Docker
+**Option 2: Run Locally Without Docker**
 ```bash
 pip install -r requirements.txt
 uvicorn app:app --reload
 ```
 
+The API will be available at `http://localhost:8000`
+
 ## API Usage
-POST `http://localhost:8000/predict`
+
+Endpoint: `POST http://localhost:8000/predict`
+
+Example Request:
 ```json
 {
   "internalFacilitiesCount": 9,
@@ -42,7 +68,7 @@ POST `http://localhost:8000/predict`
 }
 ```
 
-## Response
+Example Response:
 ```json
 {
   "predictedCluster": 1,
@@ -50,15 +76,29 @@ POST `http://localhost:8000/predict`
 }
 ```
 
-## Quality Tiers
-| Tier | Description |
-|------|-------------|
-| Premium | High internal facilities and strong healthcare access |
-| Standard | Moderate facilities and average healthcare access |
-| Basic | Low facilities and limited healthcare access |
+Once running, visit `http://localhost:8000/docs` for the full interactive Swagger UI.
 
-## Tech Stack
-- Python 3.10
-- FastAPI
-- Scikit-learn (K-Means)
-- Docker
+## Dataset
+
+The dataset contains synthetic data representing research centers across UK cities. Each record includes:
+
+| Feature | Description |
+|---|---|
+| `internalFacilitiesCount` | Number of internal labs and workstations |
+| `hospitals_10km` | Number of hospitals within 10km |
+| `pharmacies_10km` | Number of pharmacies within 10km |
+| `facilityDiversity_10km` | Diversity index of nearby facilities (0-1) |
+| `facilityDensity_10km` | Density of nearby facilities per area |
+
+## Tools and Technologies
+
+- Python 3.10 as the core language
+- FastAPI to build and serve the REST API
+- Scikit-learn for K-Means clustering and model evaluation
+- Pandas and NumPy for data processing and analysis
+- Docker to containerize and deploy the application
+- Joblib to save and load the trained model
+
+## Author
+
+Rasheed Rashid
