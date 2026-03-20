@@ -99,6 +99,4 @@ The dataset contains synthetic data representing research centers across UK citi
 - Docker to containerise and deploy the application
 - Joblib to save and load the trained model
 
-## Author
 
-Rasheed Rashid
