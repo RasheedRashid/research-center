@@ -12,15 +12,15 @@ Given information about a research center such as how many internal facilities i
 
 **Basic** — Limited facilities with minimal healthcare access
 
-This is useful for funding bodies, researchers, and healthcare organizations to quickly assess and compare research center quality across UK cities.
+This is useful for funding bodies, researchers, and healthcare organisations to quickly assess and compare research center quality across UK cities.
 
 ## How It Works
 
 1. Exploratory Data Analysis to understand patterns in the data across UK cities
 2. Feature Selection to identify the most important indicators of quality
-3. K-Means Clustering to group centers into 3 tiers without labelled data
+3. K-Means Clustering to group centres into 3 tiers without labelled data
 4. FastAPI Deployment to serve the model as a REST API endpoint
-5. Docker to containerize the entire application for easy deployment
+5. Docker to containerise the entire application for easy deployment
 
 ## Project Structure
 ```
@@ -96,7 +96,7 @@ The dataset contains synthetic data representing research centers across UK citi
 - FastAPI to build and serve the REST API
 - Scikit-learn for K-Means clustering and model evaluation
 - Pandas and NumPy for data processing and analysis
-- Docker to containerize and deploy the application
+- Docker to containerise and deploy the application
 - Joblib to save and load the trained model
 
 ## Author
